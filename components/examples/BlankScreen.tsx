@@ -2,8 +2,12 @@ import { useEffect, useReducer } from "react";
 import { StatusBar, View } from "react-native";
 import { STYLE } from "../../constants/styles";
 import { CreateStoryScreenState, StickerType } from "../../constants/types";
+import { AskMeAQuestionPreview } from "../ask-me-a-question/AskMeAQuestionPreview";
+import EmojiRatingPreview from "../emoji-rating/EmojiRatingPreview";
 import Sticker from "../global/Sticker";
 import { PollPreview } from "../Poll/PollPreview";
+import QuizPreview from "../quiz/QuizPreview";
+import StarRatingPreview from "../star-rating/StartRatingPreview";
 
 export type ActionType = { type: "story/add_sticker"; payload: StickerType };
 
@@ -51,7 +55,7 @@ export default function BlankScreen() {
   return (
     <View style={[STYLE.CONTAINER_2, { backgroundColor: "purple" }]}>
       <StatusBar hidden={true} />
-      {state.stickers.map((sticker, index) => {
+      {/* {state.stickers.map((sticker, index) => {
         switch (sticker.type) {
           case "Poll":
             return (
@@ -60,7 +64,22 @@ export default function BlankScreen() {
               </Sticker>
             );
         }
-      })}
+      })} */}
+      <Sticker>
+        <QuizPreview
+          backgroundColor="#2c2c2c"
+          correctOptionIndex={1}
+          question={
+            "whats up every body whats going on in ur life i hope its going fine here is the quiz of the day?"
+          }
+          options={[
+            "this is the first option but unlikely to be the correct one",
+            "white",
+            "red",
+            "green",
+          ]}
+        />
+      </Sticker>
     </View>
   );
 }

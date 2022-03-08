@@ -1,10 +1,12 @@
+import { useAssets } from "expo-asset";
 import { useFonts } from "expo-font";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import BlankScreen from "./components/examples/BlankScreen";
 import { STYLE } from "./constants/styles";
+import StoryCanvas from "./screens/StoryCanvas";
 
 export default function App() {
-  const [loaded, error] = useFonts({
+  const [loaded, fontError] = useFonts({
     "dancing-script-bold": require("./assets/fonts/DancingScript-Bold.ttf"),
     "dancing-script-medium": require("./assets/fonts/DancingScript-Medium.ttf"),
     "dancing-script-regular": require("./assets/fonts/DancingScript-Regular.ttf"),
@@ -52,7 +54,12 @@ export default function App() {
     "ubuntu-regular": require("./assets/fonts/Ubuntu-Regular.ttf"),
     "ubuntu-medium": require("./assets/fonts/Ubuntu-Medium.ttf"),
     "ubuntu-medium-italic": require("./assets/fonts/Ubuntu-MediumItalic.ttf"),
+    icons: require("./assets/fonts/icons.ttf"),
   });
+
+  const [assets, assetError] = useAssets([
+    require("./assets/images/colorpicker.png"),
+  ]);
 
   if (!loaded) {
     return null;
@@ -60,7 +67,7 @@ export default function App() {
 
   return (
     <GestureHandlerRootView style={STYLE.CONTAINER_1}>
-      <BlankScreen />
+      <StoryCanvas />
     </GestureHandlerRootView>
   );
 }
